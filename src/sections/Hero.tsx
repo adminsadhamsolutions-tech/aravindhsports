@@ -79,7 +79,7 @@ export default function Hero() {
 
       {/* 🧘 Center Buddha Hero */}
       <motion.div
-        className="absolute inset-0 m-auto z-10 flex items-center justify-center w-[95vw] sm:w-[98vw] h-[75vh] sm:h-[90vh] pointer-events-none"
+        className="absolute inset-0 m-auto z-10 flex items-center justify-center w-[85vw] sm:w-[98vw] h-[65vh] sm:h-[90vh] pointer-events-none"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, ease: 'easeOut' }}
@@ -94,9 +94,9 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* 🕊️ TOP-LEFT: Sparrow (Larger Size) */}
+      {/* 🕊️ TOP-LEFT: Sparrow */}
       <motion.div
-        className="absolute left-[2%] sm:left-[8%] md:left-[12%] top-[8%] sm:top-[12%] z-20 w-[30vw] sm:w-[24vw] md:w-[18vw] max-w-[320px] h-[20vh] sm:h-[28vh] pointer-events-none flex items-center justify-center"
+        className="absolute left-[2%] sm:left-[8%] md:left-[12%] top-[8%] sm:top-[12%] z-20 w-[22vw] sm:w-[22vw] md:w-[16vw] max-w-[280px] h-[15vh] sm:h-[25vh] pointer-events-none flex items-center justify-center"
         initial={{ opacity: 0, y: -25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
@@ -112,9 +112,9 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* 🥊 TOP-RIGHT: Boxing (Larger Size) */}
+      {/* 🥊 TOP-RIGHT: Boxing */}
       <motion.div
-        className="absolute right-[2%] sm:right-[8%] md:right-[12%] top-[8%] sm:top-[12%] z-20 w-[30vw] sm:w-[24vw] md:w-[18vw] max-w-[320px] h-[20vh] sm:h-[28vh] pointer-events-none flex items-center justify-center"
+        className="absolute right-[2%] sm:right-[8%] md:right-[12%] top-[8%] sm:top-[12%] z-20 w-[22vw] sm:w-[22vw] md:w-[16vw] max-w-[280px] h-[15vh] sm:h-[25vh] pointer-events-none flex items-center justify-center"
         initial={{ opacity: 0, y: -25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
@@ -130,9 +130,9 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* ⚔️ MID-LEFT: Silambam (Larger Size) */}
+      {/* ⚔️ MID-LEFT: Silambam (Pushed slightly down) */}
       <motion.div
-        className="absolute left-[1%] sm:left-[4%] md:left-[8%] top-[28%] sm:top-[34%] z-20 w-[32vw] sm:w-[26vw] md:w-[20vw] max-w-[340px] h-[24vh] sm:h-[32vh] pointer-events-none flex items-center justify-center"
+        className="absolute left-[1%] sm:left-[5%] md:left-[9%] top-[32%] sm:top-[38%] z-20 w-[24vw] sm:w-[24vw] md:w-[18vw] max-w-[300px] h-[18vh] sm:h-[28vh] pointer-events-none flex items-center justify-center"
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
@@ -148,9 +148,9 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* 🤸 MID-RIGHT: Gymnastics (Larger Size) */}
+      {/* 🤸 MID-RIGHT: Gymnastics (Pushed slightly down) */}
       <motion.div
-        className="absolute right-[1%] sm:right-[4%] md:right-[8%] top-[28%] sm:top-[34%] z-20 w-[32vw] sm:w-[26vw] md:w-[20vw] max-w-[340px] h-[24vh] sm:h-[32vh] pointer-events-none flex items-center justify-center"
+        className="absolute right-[1%] sm:right-[5%] md:right-[9%] top-[32%] sm:top-[38%] z-20 w-[24vw] sm:w-[24vw] md:w-[18vw] max-w-[300px] h-[18vh] sm:h-[28vh] pointer-events-none flex items-center justify-center"
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
@@ -166,9 +166,9 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* 🧘 BOTTOM-LEFT: Yoga Pose 1 (Larger Size) */}
+      {/* 🧘 BOTTOM-LEFT: Yoga Pose 1 */}
       <motion.div
-        className="absolute left-0 bottom-0 z-20 w-[42vw] sm:w-[36vw] md:w-[28vw] max-w-[440px] h-[40vh] sm:h-[56vh] md:h-[64vh] pointer-events-none flex items-end justify-start"
+        className="absolute left-0 bottom-0 z-20 w-[38vw] sm:w-[32vw] md:w-[26vw] max-w-[400px] h-[36vh] sm:h-[52vh] md:h-[60vh] pointer-events-none flex items-end justify-start"
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.25, ease: [0.25, 1, 0.5, 1] }}
@@ -184,9 +184,9 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* 🧘 BOTTOM-RIGHT: Yoga Pose 2 (Larger Size) */}
+      {/* 🧘 BOTTOM-RIGHT: Yoga Pose 2 */}
       <motion.div
-        className="absolute right-0 bottom-0 z-20 w-[42vw] sm:w-[36vw] md:w-[28vw] max-w-[440px] h-[40vh] sm:h-[56vh] md:h-[64vh] pointer-events-none flex items-end justify-end"
+        className="absolute right-0 bottom-0 z-20 w-[38vw] sm:w-[32vw] md:w-[26vw] max-w-[400px] h-[36vh] sm:h-[52vh] md:h-[60vh] pointer-events-none flex items-end justify-end"
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.25, ease: [0.25, 1, 0.5, 1] }}
