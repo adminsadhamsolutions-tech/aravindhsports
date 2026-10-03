@@ -25,7 +25,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [activeCategory, setActiveCategory] = useState('All');
   const [lightbox, setLightbox] = useState<string | null>(null);
-  const [visibleCount, setVisibleCount] = useState(4); // Exactly 4 items visible initially (2 rows of 2 columns)
+  const [visibleCount, setVisibleCount] = useState(8); // 8 items: 4 rows on mobile (2 cols), 2 rows on desktop (4 cols)
 
   useEffect(() => {
     supabase
@@ -66,7 +66,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
 
   const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
-    setVisibleCount(4); // Reset back to initial 4 items on category switch
+    setVisibleCount(8); // Reset back to initial 8 items on category switch
   };
 
   const handleOpenGalleryPage = (e: React.MouseEvent) => {
@@ -124,16 +124,16 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
           ))}
         </motion.div>
 
-        {/* 2-Column Grid Layout */}
-        <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+        {/* Responsive Grid: 2 columns on mobile, 4 columns on desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
           {displayedImages.map((img, i) => (
             <motion.div
               key={img.id}
-              initial={{ opacity: '0', scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: (i % 2) * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl glass-dark cursor-pointer h-56 sm:h-72 md:h-80"
+              transition={{ duration: 0.4, delay: (i % 4) * 0.1 }}
+              className="group relative overflow-hidden rounded-2xl glass-dark cursor-pointer h-52 sm:h-64 md:h-72"
               onClick={() => setLightbox(img.image_url)}
             >
               <img
@@ -155,7 +155,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
           <div className="text-center mt-12">
             <button
               type="button"
-              onClick={() => setVisibleCount((prev) => prev + 4)}
+              onClick={() => setVisibleCount((prev) => prev + 8)}
               className="inline-flex items-center gap-2 px-8 py-3 rounded-full glass text-white font-semibold text-sm hover:bg-white/10 transition-all cursor-pointer border border-white/10"
             >
               <span>Load More</span>
