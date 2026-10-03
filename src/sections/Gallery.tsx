@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ZoomIn, ArrowRight } from 'lucide-react';
+import { X, ZoomIn, ArrowRight, ChevronDown } from 'lucide-react';
 import type { GalleryImage } from '@/lib/supabase';
 import { supabase } from '@/lib/supabase';
 
@@ -13,6 +13,10 @@ const placeholderImages = [
   'https://images.pexels.com/photos/8637912/pexels-photo-8637912.jpeg?auto=compress&cs=tinysrgb&w=800',
   'https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg?auto=compress&cs=tinysrgb&w=800',
   'https://images.pexels.com/photos/4046718/pexels-photo-4046718.jpeg?auto=compress&cs=tinysrgb&w=800',
+  'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800',
+  'https://images.pexels.com/photos/4162487/pexels-photo-4162487.jpeg?auto=compress&cs=tinysrgb&w=800',
+  'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=800',
+  'https://images.pexels.com/photos/4498574/pexels-photo-4498574.jpeg?auto=compress&cs=tinysrgb&w=800',
 ];
 
 const placeholderCats = ['Training', 'Martial Arts', 'Yoga', 'Events'];
@@ -21,6 +25,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [activeCategory, setActiveCategory] = useState('All');
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(8); // Exactly 8 items visible initially (4 rows of 2 columns)
 
   useEffect(() => {
     supabase
@@ -49,8 +54,22 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
     return ['All', ...Array.from(cats)];
   }, [images]);
 
-  const filtered = activeCategory === 'All' ? images : images.filter((img) => img.category === activeCategory);
+  // Filter images first based on category
+  const filtered = useMemo(() => {
+    return activeCategory === 'All' ? images : images.filter((img) => img.category === activeCategory);
+  }, [images, activeCategory]);
+
+  // Then limit the displayed items according to visibleCount
+  const displayedImages = useMemo(() => {
+    return filtered.slice(0, visibleCount);
+  }, [filtered, visibleCount]);
+
   const heightClasses = ['h-64', 'h-80', 'h-72', 'h-96', 'h-64', 'h-80', 'h-72', 'h-96'];
+
+  const handleCategoryChange = (cat: string) => {
+    setActiveCategory(cat);
+    setVisibleCount(8); // Reset to initial 8 items when switching categories
+  };
 
   const handleOpenGalleryPage = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -95,7 +114,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
             <button
               key={cat}
               type="button"
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => handleCategoryChange(cat)}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
                 activeCategory === cat
                   ? 'bg-accent text-white glow-accent'
@@ -109,7 +128,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
 
         {/* Masonry grid */}
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-          {filtered.map((img, i) => (
+          {displayedImages.map((img, i) => (
             <motion.div
               key={img.id}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -136,6 +155,20 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
             </motion.div>
           ))}
         </div>
+
+        {/* Load More Button - Only shows if there are more filtered images left to display */}
+        {visibleCount < filtered.length && (
+          <div className="text-center mt-12">
+            <button
+              type="button"
+              onClick={() => setVisibleCount((prev) => prev + 6)}
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full glass text-white font-semibold text-sm hover:bg-white/10 transition-all cursor-pointer border border-white/10"
+            >
+              <span>Load More</span>
+              <ChevronDown className="w-4 h-4 text-accent" />
+            </button>
+          </div>
+        )}
 
         {/* Bottom Button to View Full Gallery Page */}
         {showButton && (

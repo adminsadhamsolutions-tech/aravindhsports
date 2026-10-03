@@ -200,11 +200,11 @@ function AppContent() {
           <Navbar />
           <main>
             <Hero />
+            <Suspense fallback={<SectionSkeleton />}><Gallery /></Suspense>
             <Suspense fallback={<SectionSkeleton />}><About /></Suspense>
             <Suspense fallback={<SectionSkeleton />}><Programs /></Suspense>
             <Suspense fallback={<SectionSkeleton />}><Schedule /></Suspense>
             <Suspense fallback={<SectionSkeleton />}><Trainers /></Suspense>
-            <Suspense fallback={<SectionSkeleton />}><Gallery /></Suspense>
             <Suspense fallback={<SectionSkeleton />}><Testimonials /></Suspense>
             <Suspense fallback={<SectionSkeleton />}><Contact /></Suspense>
           </main>
