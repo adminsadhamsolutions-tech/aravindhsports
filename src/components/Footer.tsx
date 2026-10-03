@@ -24,7 +24,7 @@ export default function Footer() {
                 <Activity className="w-6 h-6 text-white" />
               </div>
               <div className="font-display font-extrabold text-lg">
-                <span className="text-white">DYNAMIC</span>
+                <span className="text-white">Aravind</span>
                 <span className="block text-accent text-[0.6rem] tracking-[0.2em] font-semibold">SPORTS ACADEMY</span>
               </div>
             </div>
@@ -64,7 +64,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2 text-white/50 text-sm">
                 <Mail className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-                info@dynamicsportsacademy.in
+                info@Aravindsportsacademy.in
               </li>
             </ul>
           </div>
@@ -95,7 +95,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/30 text-xs">
-            © {new Date().getFullYear()} Dynamic Sports & Cultural Academy. All rights reserved.
+            © {new Date().getFullYear()} Aravind Sports & Cultural Academy. All rights reserved.
           </p>
           <a href="/admin" className="text-white/30 hover:text-accent text-xs transition-colors">
             Admin Login

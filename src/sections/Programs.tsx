@@ -44,7 +44,7 @@ const defaultPrograms: Program[] = [
   {
     id: '5',
     title: 'Taekwondo',
-    description: 'Dynamic aerial kicking techniques, reflex drills, and tournament sparring.',
+    description: 'Aravind aerial kicking techniques, reflex drills, and tournament sparring.',
     icon: '',
     image_url: 'https://res.cloudinary.com/bvu3yzmo/image/upload/v1788934726/Gemini_Generated_Image_w99nf3w99nf3w99n.png',
     display_order: 5,

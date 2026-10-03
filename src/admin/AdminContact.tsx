@@ -7,7 +7,7 @@ export default function AdminContact() {
   const [content, setContent] = useState({
     phone: '+91 98948 28541',
     address: 'Hosur, Tamil Nadu, India',
-    email: 'info@dynamicsportsacademy.in',
+    email: 'info@Aravindsportsacademy.in',
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);

@@ -1,5 +1,5 @@
 /*
-# Dynamic Sports & Cultural Academy - Database Schema
+# Aravind Sports & Cultural Academy - Database Schema
 
 1. New Tables
 - `site_content` — stores editable site-wide content (hero, about, contact info) as key-value pairs
@@ -153,15 +153,15 @@ CREATE POLICY "auth_delete_contact_messages" ON contact_messages FOR DELETE
 -- ===================== SEED DATA =====================
 INSERT INTO site_content (key, value) VALUES
   ('hero', '{"heading":"Train Like a Champion","subtext":"Yoga, Martial Arts & Sports Training in Hosur","primary_button":"Join Now","secondary_button":"Call Now"}'),
-  ('about', '{"heading":"About Our Academy","text":"Dynamic Sports Academy provides expert training in Yoga, Karate, Kung Fu, Taekwondo, Gymnastics, Archery and more. Our certified coaches are dedicated to nurturing champions both on and off the field.","stats":[{"label":"Students Trained","value":"500+"},{"label":"Expert Coaches","value":"15+"},{"label":"Disciplines","value":"8+"},{"label":"Years of Excellence","value":"10+"}]}'),
-  ('contact', '{"phone":"+91 98948 28541","address":"Hosur, Tamil Nadu, India","email":"info@dynamicsportsacademy.in"}')
+  ('about', '{"heading":"About Our Academy","text":"Aravind Sports Academy provides expert training in Yoga, Karate, Kung Fu, Taekwondo, Gymnastics, Archery and more. Our certified coaches are dedicated to nurturing champions both on and off the field.","stats":[{"label":"Students Trained","value":"500+"},{"label":"Expert Coaches","value":"15+"},{"label":"Disciplines","value":"8+"},{"label":"Years of Excellence","value":"10+"}]}'),
+  ('contact', '{"phone":"+91 98948 28541","address":"Hosur, Tamil Nadu, India","email":"info@Aravindsportsacademy.in"}')
 ON CONFLICT (key) DO NOTHING;
 
 INSERT INTO programs (title, description, icon, display_order) VALUES
   ('Yoga', 'Find balance, flexibility, and inner peace through guided yoga sessions.', 'Flower2', 1),
   ('Kung Fu', 'Master the ancient Chinese martial art of discipline and power.', 'Swords', 2),
   ('Karate', 'Build strength, focus, and self-defense skills with traditional karate.', 'Zap', 3),
-  ('Taekwondo', 'Dynamic kicking techniques and Olympic-style sparring training.', 'Target', 4),
+  ('Taekwondo', 'Aravind kicking techniques and Olympic-style sparring training.', 'Target', 4),
   ('Gymnastics', 'Develop agility, strength, and coordination through gymnastics.', 'PersonStanding', 5),
   ('Archery', 'Precision, patience, and focus with professional archery coaching.', 'Target', 6),
   ('Dance', 'Express yourself through energetic and cultural dance forms.', 'Music', 7),

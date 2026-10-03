@@ -10,7 +10,7 @@ export default function WhatsAppButton() {
   const [programs] = usePrograms();
 
   const handleQuickClick = () => {
-    window.open(buildWhatsAppLink('Hi, I\'m interested in joining Dynamic Sports Academy. Please share details.'), '_blank');
+    window.open(buildWhatsAppLink('Hi, I\'m interested in joining Aravind Sports Academy. Please share details.'), '_blank');
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {

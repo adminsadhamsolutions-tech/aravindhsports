@@ -45,7 +45,7 @@ export default function AdminLogin() {
               <Activity className="w-7 h-7 text-white" />
             </div>
             <div className="font-display font-extrabold text-xl">
-              <span className="text-white">DYNAMIC</span>
+              <span className="text-white">Aravind</span>
               <span className="block text-accent text-[0.6rem] tracking-[0.2em] font-semibold">SPORTS ACADEMY</span>
             </div>
           </div>

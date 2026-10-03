@@ -98,7 +98,7 @@ export function buildWhatsAppLink(message: string): string {
 
 export function buildEnquiryWhatsAppLink(name: string, phone: string, program: string, message?: string): string {
   const text = [
-    `Hi, I'm interested in joining Dynamic Sports Academy.`,
+    `Hi, I'm interested in joining Aravind Sports Academy.`,
     ``,
     `Name: ${name}`,
     `Phone: ${phone}`,

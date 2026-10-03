@@ -61,7 +61,7 @@ export default function AdminDashboard() {
               <Activity className="w-6 h-6 text-white" />
             </div>
             <div className="font-display font-extrabold text-sm">
-              <span className="text-white">DYNAMIC</span>
+              <span className="text-white">Aravind</span>
               <span className="block text-accent text-[0.5rem] tracking-[0.2em] font-semibold">SPORTS ACADEMY</span>
             </div>
           </div>

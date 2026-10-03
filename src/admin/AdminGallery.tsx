@@ -13,7 +13,7 @@ export default function AdminGallery() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
 
-  // Dynamic list of categories gathered from existing images + defaults
+  // Aravind list of categories gathered from existing images + defaults
   const categories = Array.from(
     new Set([...defaultCategories, ...images.map((img) => img.category)])
   );
