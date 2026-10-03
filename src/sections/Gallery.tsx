@@ -25,7 +25,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [activeCategory, setActiveCategory] = useState('All');
   const [lightbox, setLightbox] = useState<string | null>(null);
-  const [visibleCount, setVisibleCount] = useState(8); // Exactly 8 items visible initially (4 rows of 2 columns)
+  const [visibleCount, setVisibleCount] = useState(4); // Exactly 4 items visible initially (2 rows of 2 columns)
 
   useEffect(() => {
     supabase
@@ -64,11 +64,9 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
     return filtered.slice(0, visibleCount);
   }, [filtered, visibleCount]);
 
-  const heightClasses = ['h-64', 'h-80', 'h-72', 'h-96', 'h-64', 'h-80', 'h-72', 'h-96'];
-
   const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
-    setVisibleCount(8); // Reset to initial 8 items when switching categories
+    setVisibleCount(4); // Reset back to initial 4 items on category switch
   };
 
   const handleOpenGalleryPage = (e: React.MouseEvent) => {
@@ -102,20 +100,20 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
           </p>
         </motion.div>
 
-        {/* Category filter */}
+        {/* Category filter with horizontal scroll on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-10"
+          className="flex items-center justify-start md:justify-center gap-3 mb-10 overflow-x-auto pb-3 scrollbar-none px-2"
         >
           {categories.map((cat) => (
             <button
               key={cat}
               type="button"
               onClick={() => handleCategoryChange(cat)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 activeCategory === cat
                   ? 'bg-accent text-white glow-accent'
                   : 'glass text-white/60 hover:text-white'
@@ -126,30 +124,26 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
           ))}
         </motion.div>
 
-        {/* Masonry grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+        {/* 2-Column Grid Layout */}
+        <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
           {displayedImages.map((img, i) => (
             <motion.div
               key={img.id}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: '0', scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: (i % 3) * 0.1 }}
-              className="group relative break-inside-avoid overflow-hidden rounded-2xl glass-dark cursor-pointer"
+              transition={{ duration: 0.4, delay: (i % 2) * 0.1 }}
+              className="group relative overflow-hidden rounded-2xl glass-dark cursor-pointer h-56 sm:h-72 md:h-80"
               onClick={() => setLightbox(img.image_url)}
             >
               <img
                 src={img.image_url}
                 alt={img.title}
                 loading="lazy"
-                className={`w-full ${heightClasses[i % heightClasses.length]} object-cover transition-transform duration-700 group-hover:scale-110`}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                <h3 className="font-display font-bold text-white text-lg">{img.title}</h3>
-                <span className="text-accent text-sm">{img.category}</span>
-              </div>
-              <div className="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <div className="absolute inset-0 bg-primary-dark/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
                 <ZoomIn className="w-5 h-5 text-white" />
               </div>
             </motion.div>
@@ -161,7 +155,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
           <div className="text-center mt-12">
             <button
               type="button"
-              onClick={() => setVisibleCount((prev) => prev + 6)}
+              onClick={() => setVisibleCount((prev) => prev + 4)}
               className="inline-flex items-center gap-2 px-8 py-3 rounded-full glass text-white font-semibold text-sm hover:bg-white/10 transition-all cursor-pointer border border-white/10"
             >
               <span>Load More</span>
