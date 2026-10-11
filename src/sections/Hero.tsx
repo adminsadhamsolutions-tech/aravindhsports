@@ -130,74 +130,74 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* ⚔️ MID-LEFT: Silambam (Pushed slightly down) */}
+      {/* 🧘 MID-LEFT: Yoga Pose Left (Moved to where Silambam used to be) */}
       <motion.div
-        className="absolute left-[1%] sm:left-[5%] md:left-[9%] top-[32%] sm:top-[38%] z-20 w-[24vw] sm:w-[24vw] md:w-[18vw] max-w-[300px] h-[18vh] sm:h-[28vh] pointer-events-none flex items-center justify-center"
+        className="absolute left-[2%] sm:left-[6%] md:left-[10%] top-[34%] sm:top-[40%] z-20 w-[26vw] sm:w-[24vw] md:w-[18vw] max-w-[320px] h-[20vh] sm:h-[30vh] pointer-events-none flex items-center justify-center"
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
         style={{ willChange: 'transform, opacity' }}
       >
         <motion.img
-          src={SILAMBAM_IMG}
-          alt="Silambam"
+          src={YOGA_LEFT_IMG}
+          alt="Yoga Pose Left"
           className="w-full h-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.25)]"
-          animate={{ y: [0, -8, 0], rotate: [0, 2, 0] }}
-          transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           style={{ willChange: 'transform' }}
         />
       </motion.div>
 
-      {/* 🤸 MID-RIGHT: Gymnastics (Pushed slightly down) */}
+      {/* 🧘 MID-RIGHT: Yoga Pose Right (Moved to where Gymnastics used to be) */}
       <motion.div
-        className="absolute right-[1%] sm:right-[5%] md:right-[9%] top-[32%] sm:top-[38%] z-20 w-[24vw] sm:w-[24vw] md:w-[18vw] max-w-[300px] h-[18vh] sm:h-[28vh] pointer-events-none flex items-center justify-center"
+        className="absolute right-[2%] sm:right-[6%] md:right-[10%] top-[34%] sm:top-[40%] z-20 w-[26vw] sm:w-[24vw] md:w-[18vw] max-w-[320px] h-[20vh] sm:h-[30vh] pointer-events-none flex items-center justify-center"
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
         style={{ willChange: 'transform, opacity' }}
       >
         <motion.img
-          src={GYMNASTICS_IMG}
-          alt="Gymnastics"
+          src={YOGA_RIGHT_IMG}
+          alt="Yoga Pose Right"
           className="w-full h-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.25)]"
-          animate={{ y: [0, 8, 0], rotate: [0, -2, 0] }}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ willChange: 'transform' }}
+        />
+      </motion.div>
+
+      {/* ⚔️ BOTTOM-LEFT: Silambam (Moved down to where Yoga was) */}
+      <motion.div
+        className="absolute left-[12%] sm:left-[18%] md:left-[22%] bottom-[12%] sm:bottom-[15%] z-20 w-[28vw] sm:w-[22vw] md:w-[18vw] max-w-[300px] h-[28vh] sm:h-[38vh] md:h-[44vh] pointer-events-none flex items-end justify-start"
+        initial={{ opacity: 0, y: 60 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.25, ease: [0.25, 1, 0.5, 1] }}
+        style={{ willChange: 'transform, opacity' }}
+      >
+        <motion.img
+          src={SILAMBAM_IMG}
+          alt="Silambam"
+          className="w-full h-full object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.32)]"
+          animate={{ y: [0, -10, 0], rotate: [0, 2, 0] }}
           transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
           style={{ willChange: 'transform' }}
         />
       </motion.div>
 
-      {/* 🧘 BOTTOM-LEFT: Yoga Pose 1 */}
+      {/* 🤸 BOTTOM-RIGHT: Gymnastics (Moved down to where Yoga was) */}
       <motion.div
-        className="absolute left-0 bottom-0 z-20 w-[38vw] sm:w-[32vw] md:w-[26vw] max-w-[400px] h-[36vh] sm:h-[52vh] md:h-[60vh] pointer-events-none flex items-end justify-start"
+        className="absolute right-[12%] sm:right-[18%] md:right-[22%] bottom-[12%] sm:bottom-[15%] z-20 w-[28vw] sm:w-[22vw] md:w-[18vw] max-w-[300px] h-[28vh] sm:h-[38vh] md:h-[44vh] pointer-events-none flex items-end justify-end"
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.25, ease: [0.25, 1, 0.5, 1] }}
         style={{ willChange: 'transform, opacity' }}
       >
         <motion.img
-          src={YOGA_LEFT_IMG}
-          alt="Yoga Pose Left"
+          src={GYMNASTICS_IMG}
+          alt="Gymnastics"
           className="w-full h-full object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.32)]"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ willChange: 'transform' }}
-        />
-      </motion.div>
-
-      {/* 🧘 BOTTOM-RIGHT: Yoga Pose 2 */}
-      <motion.div
-        className="absolute right-0 bottom-0 z-20 w-[38vw] sm:w-[32vw] md:w-[26vw] max-w-[400px] h-[36vh] sm:h-[52vh] md:h-[60vh] pointer-events-none flex items-end justify-end"
-        initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.25, ease: [0.25, 1, 0.5, 1] }}
-        style={{ willChange: 'transform, opacity' }}
-      >
-        <motion.img
-          src={YOGA_RIGHT_IMG}
-          alt="Yoga Pose Right"
-          className="w-full h-full object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.32)]"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ y: [0, 10, 0], rotate: [0, -2, 0] }}
+          transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
           style={{ willChange: 'transform' }}
         />
       </motion.div>
@@ -238,6 +238,15 @@ export default function Hero() {
 
         {/* Action Buttons */}
         <div className="relative z-10 flex items-center justify-center gap-2.5 sm:gap-4 mt-2.5 sm:mt-4">
+          <motion.a
+            href="tel:+919894828541"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-4 sm:px-7 py-2 sm:py-2.5 rounded-full bg-white/90 backdrop-blur-sm border border-orange-200 text-orange-600 text-[11px] sm:text-sm font-extrabold uppercase tracking-wider hover:bg-orange-50 cursor-pointer shadow-sm transition-all"
+          >
+            {content.secondary_button}
+          </motion.a>
+
           <motion.button
             onClick={scrollToContact}
             whileHover={{ scale: 1.05 }}
@@ -251,15 +260,6 @@ export default function Hero() {
           >
             {content.primary_button}
           </motion.button>
-
-          <motion.a
-            href="tel:+919894828541"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-4 sm:px-7 py-2 sm:py-2.5 rounded-full bg-white/90 backdrop-blur-sm border border-orange-200 text-orange-600 text-[11px] sm:text-sm font-extrabold uppercase tracking-wider hover:bg-orange-50 cursor-pointer shadow-sm transition-all"
-          >
-            {content.secondary_button}
-          </motion.a>
         </div>
       </motion.div>
     </section>

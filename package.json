@@ -13,7 +13,7 @@
   "dependencies": {
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
-    "@supabase/supabase-js": "^2.57.4",
+    "@supabase/supabase-js": "^2.117.3",
     "@types/three": "^0.185.4",
     "framer-motion": "^13.2.0",
     "lucide-react": "^0.446.0",

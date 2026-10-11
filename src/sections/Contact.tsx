@@ -6,12 +6,16 @@ import { usePrograms } from '@/hooks/usePrograms';
 
 type ContactInfo = {
   phone: string;
+  masterPhone: string;
+  adminPhone: string;
   address: string;
   email: string;
 };
 
 const defaultContact: ContactInfo = {
   phone: '+91 98948 28541',
+  masterPhone: '+91 82205 15741',
+  adminPhone: '+91 98944 80416',
   address: 'Hosur, Tamil Nadu, India',
   email: 'info@aravindsportsacademy.in',
 };
@@ -62,7 +66,9 @@ export default function Contact({ showButton = true }: { showButton?: boolean })
   };
 
   const contactItems = [
-    { icon: Phone, label: 'Phone', value: info.phone, href: `tel:${info.phone.replace(/\s/g, '')}` },
+    { icon: Phone, label: 'Phone (Primary)', value: info.phone, href: `tel:${info.phone.replace(/\s/g, '')}` },
+    { icon: Phone, label: 'Master Phone', value: info.masterPhone, href: `tel:${info.masterPhone.replace(/\s/g, '')}` },
+    { icon: Phone, label: 'Admin Phone', value: info.adminPhone, href: `tel:${info.adminPhone.replace(/\s/g, '')}` },
     { icon: MapPin, label: 'Address', value: info.address },
     { icon: Mail, label: 'Email', value: info.email, href: `mailto:${info.email}` },
   ];

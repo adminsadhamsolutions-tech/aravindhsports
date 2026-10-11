@@ -4,28 +4,35 @@ import { X, ZoomIn, ArrowRight, ChevronDown } from 'lucide-react';
 import type { GalleryImage } from '@/lib/supabase';
 import { supabase } from '@/lib/supabase';
 
-const placeholderImages = [
-  'https://images.pexels.com/photos/704554/pexels-photo-704554.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/28080/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/4753986/pexels-photo-4753986.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/8637912/pexels-photo-8637912.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/4046718/pexels-photo-4046718.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/4162487/pexels-photo-4162487.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=800',
-  'https://images.pexels.com/photos/4498574/pexels-photo-4498574.jpeg?auto=compress&cs=tinysrgb&w=800',
+// Standard 8 Main Categories to always display
+const STANDARD_CATEGORIES = [
+  'Yoga',
+  'Karate',
+  'Kung Fu',
+  'Taekwondo',
+  'Gymnastics',
+  'Archery',
+  'Dance',
+  'Air Gun Training',
 ];
 
-const placeholderCats = ['Training', 'Martial Arts', 'Yoga', 'Events'];
+const STANDARD_SUB_CATEGORIES: Record<string, string[]> = {
+  Yoga: ['Kids Yoga', 'Elders Yoga', 'Hatha Yoga', 'Power Yoga', 'General'],
+  Karate: ['Kata', 'Kumite', 'Self Defense', 'Belt Training', 'General'],
+  'Kung Fu': ['Forms', 'Weapons', 'Sparring', 'General'],
+  Taekwondo: ['Poomsae', 'Kyorugi', 'Kicks', 'General'],
+  Gymnastics: ['Floor Exercise', 'Balance Beam', 'Vault', 'Flexibility', 'General'],
+  Archery: ['Target Practice', 'Outdoor Archery', 'Youth Archery', 'General'],
+  Dance: ['Classical', 'Western', 'Folk', 'General'],
+  'Air Gun Training': ['Precision Shooting', 'Target Focus', 'General'],
+};
 
 export default function Gallery({ showButton = true }: { showButton?: boolean }) {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [activeCategory, setActiveCategory] = useState('All');
+  const [activeSubCategory, setActiveSubCategory] = useState('All');
   const [lightbox, setLightbox] = useState<string | null>(null);
-  const [visibleCount, setVisibleCount] = useState(8); // 8 items: 4 rows on mobile (2 cols), 2 rows on desktop (4 cols)
+  const [visibleCount, setVisibleCount] = useState(8);
 
   useEffect(() => {
     supabase
@@ -35,38 +42,39 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
       .then(({ data }) => {
         if (data && data.length > 0) {
           setImages(data);
-        } else {
-          const seeded: GalleryImage[] = placeholderImages.map((url, i) => ({
-            id: `seed-${i}`,
-            title: `Gallery ${i + 1}`,
-            image_url: url,
-            category: placeholderCats[i % placeholderCats.length],
-            display_order: i,
-            created_at: '',
-          }));
-          setImages(seeded);
         }
       });
   }, []);
 
+  // Main Categories list starting with 'All'
   const categories = useMemo(() => {
-    const cats = new Set(images.map((img) => img.category));
-    return ['All', ...Array.from(cats)];
-  }, [images]);
+    return ['All', ...STANDARD_CATEGORIES];
+  }, []);
 
-  // Filter images first based on category
+  // Sub-categories list for active category
+  const subCategories = useMemo(() => {
+    if (activeCategory === 'All') return [];
+    const subs = STANDARD_SUB_CATEGORIES[activeCategory] || ['General'];
+    return ['All', ...subs];
+  }, [activeCategory]);
+
+  // Filtered images based on selection
   const filtered = useMemo(() => {
-    return activeCategory === 'All' ? images : images.filter((img) => img.category === activeCategory);
-  }, [images, activeCategory]);
+    return images.filter((img: any) => {
+      const matchCat = activeCategory === 'All' || img.category === activeCategory;
+      const matchSub = activeSubCategory === 'All' || (img.sub_category || 'General') === activeSubCategory;
+      return matchCat && matchSub;
+    });
+  }, [images, activeCategory, activeSubCategory]);
 
-  // Then limit the displayed items according to visibleCount
   const displayedImages = useMemo(() => {
     return filtered.slice(0, visibleCount);
   }, [filtered, visibleCount]);
 
   const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
-    setVisibleCount(8); // Reset back to initial 8 items on category switch
+    setActiveSubCategory('All');
+    setVisibleCount(8);
   };
 
   const handleOpenGalleryPage = (e: React.MouseEvent) => {
@@ -87,7 +95,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
           <span className="inline-block px-4 py-1.5 rounded-full glass text-accent text-sm font-semibold mb-4">
             GALLERY
@@ -96,17 +104,17 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
             Moments of <span className="gradient-text">Excellence</span>
           </h2>
           <p className="text-white/50 text-lg max-w-2xl mx-auto">
-            Glimpses of our champions in training and competition.
+            Explore our training programs, martial arts, yoga sessions, and championships.
           </p>
         </motion.div>
 
-        {/* Category filter with horizontal scroll on mobile */}
+        {/* Main Category Filter Pills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex items-center justify-start md:justify-center gap-3 mb-10 overflow-x-auto pb-3 scrollbar-none px-2"
+          className="flex items-center justify-start md:justify-center gap-3 mb-6 overflow-x-auto pb-2 scrollbar-none px-2"
         >
           {categories.map((cat) => (
             <button
@@ -124,16 +132,44 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
           ))}
         </motion.div>
 
-        {/* Responsive Grid: 2 columns on mobile, 4 columns on desktop */}
+        {/* Sub-Category Filter Pills */}
+        {subCategories.length > 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-start md:justify-center gap-2 mb-10 overflow-x-auto pb-2 scrollbar-none px-2"
+          >
+            <span className="text-white/40 text-xs uppercase tracking-wider mr-2">Filter Sub:</span>
+            {subCategories.map((sub) => (
+              <button
+                key={sub}
+                type="button"
+                onClick={() => {
+                  setActiveSubCategory(sub);
+                  setVisibleCount(8);
+                }}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                  activeSubCategory === sub
+                    ? 'bg-white text-primary-dark font-bold'
+                    : 'bg-white/5 text-white/50 hover:text-white border border-white/10'
+                }`}
+              >
+                {sub}
+              </button>
+            ))}
+          </motion.div>
+        )}
+
+        {/* Responsive Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
-          {displayedImages.map((img, i) => (
+          {displayedImages.map((img: any, i) => (
             <motion.div
               key={img.id}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: (i % 4) * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl glass-dark cursor-pointer h-52 sm:h-64 md:h-72"
+              className="group relative overflow-hidden rounded-2xl glass-dark cursor-pointer h-52 sm:h-64 md:h-72 border border-white/10"
               onClick={() => setLightbox(img.image_url)}
             >
               <img
@@ -142,7 +178,12 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-primary-dark/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <div>
+                  <div className="text-accent text-xs font-semibold">{img.sub_category || img.category}</div>
+                  <div className="text-white text-sm font-bold">{img.title}</div>
+                </div>
+              </div>
               <div className="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
                 <ZoomIn className="w-5 h-5 text-white" />
               </div>
@@ -150,7 +191,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
           ))}
         </div>
 
-        {/* Load More Button - Only shows if there are more filtered images left to display */}
+        {/* Load More Button */}
         {visibleCount < filtered.length && (
           <div className="text-center mt-12">
             <button
@@ -164,7 +205,7 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
           </div>
         )}
 
-        {/* Bottom Button to View Full Gallery Page */}
+        {/* View Full Gallery Page Button */}
         {showButton && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -181,25 +222,10 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
                 backgroundColor: '#f97316',
                 backgroundImage: 'linear-gradient(135deg, #FF6B00 0%, #FF8C38 50%, #ea580c 100%)',
               }}
-              whileHover={{ scale: 1.05, boxShadow: '0 10px 38px rgba(249, 115, 22, 0.65)' }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <motion.div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%)',
-                  width: '50%',
-                  transform: 'skewX(-25deg)',
-                }}
-                animate={{ left: ['-120%', '220%'] }}
-                transition={{
-                  duration: 2.2,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                  repeatDelay: 0.8,
-                }}
-              />
-              <span className="relative z-10 drop-shadow-sm">View Full Gallery</span>
+              <span className="relative z-10">View Full Gallery</span>
               <ArrowRight className="relative z-10 w-5 h-5" />
             </motion.button>
           </motion.div>
@@ -227,7 +253,6 @@ export default function Gallery({ showButton = true }: { showButton?: boolean })
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 20 }}
               src={lightbox}
               alt="Gallery preview"
               className="max-w-full max-h-[85vh] rounded-2xl object-contain"

@@ -6,6 +6,8 @@ import { supabase } from '@/lib/supabase';
 export default function AdminContact() {
   const [content, setContent] = useState({
     phone: '+91 98948 28541',
+    masterPhone: '+91 82205 15741',
+    adminPhone: '+91 98944 80416',
     address: 'Hosur, Tamil Nadu, India',
     email: 'info@Aravindsportsacademy.in',
   });
@@ -44,11 +46,29 @@ export default function AdminContact() {
 
       <div className="max-w-2xl space-y-5">
         <div>
-          <label className="block text-sm text-white/60 mb-2">Phone Number</label>
+          <label className="block text-sm text-white/60 mb-2">Primary Phone Number</label>
           <input
             type="text"
             value={content.phone}
             onChange={(e) => setContent({ ...content, phone: e.target.value })}
+            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-accent focus:outline-none transition-colors"
+          />
+        </div>
+        <div>
+          <label className="block text-sm text-white/60 mb-2">Master Phone Number</label>
+          <input
+            type="text"
+            value={content.masterPhone}
+            onChange={(e) => setContent({ ...content, masterPhone: e.target.value })}
+            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-accent focus:outline-none transition-colors"
+          />
+        </div>
+        <div>
+          <label className="block text-sm text-white/60 mb-2">Admin Phone Number</label>
+          <input
+            type="text"
+            value={content.adminPhone}
+            onChange={(e) => setContent({ ...content, adminPhone: e.target.value })}
             className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-accent focus:outline-none transition-colors"
           />
         </div>
